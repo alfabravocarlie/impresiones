@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "Impresiones y Llenado de Memorias Anita y Ale",
+    "subtitles": ["Transformamos tus ideas", "Calidad Inigualable", "Matanzas, Cuba"],
+    "cta_primary": "Ver Catálogo",
+    "cta_secondary": "Servicios"
+  },
+  "about": {
+    "title": "Acerca de Nosotros",
+    "description": "Nos especializamos en impresión personalizada y llenado de memorias. Un servicio rápido, confiable y adaptado a las necesidades de todos.",
+    "features": [
+      { "title": "Atención Personalizada", "desc": "Adaptamos cada proyecto." },
+      { "title": "Rapidez", "desc": "Entregas puntuales sin sacrificar calidad." },
+      { "title": "Confianza", "desc": "Claridad y transparencia en todo." }
+    ],
+    "image_url": "Impresiones.jpg"
+  },
+  "team": [
+    { "name": "Anita", "role": "Impresiones y Atención", "desc": "Experta en manejo de clientes, acabados de impresión y plasticado profesional." },
+    { "name": "Ale", "role": "Edición y Tecnología", "desc": "Especialista en llenado de memorias, organización de contenido y soporte técnico." }
+  ],
+  "stats": {
+    "clients": "500",
+    "memories": "1200",
+    "years": "5"
+  },
+  "precios": {
+    "impresion": {
+      "texto_bn": "20",
+      "texto_color": "30",
+      "imagen_bn": "40",
+      "imagen_color": "50",
+      "fotocopia_bn": "50",
+      "fotocopia_color": "60",
+      "edicion": "100",
+      "plasticado_carnet": "200",
+      "plasticado_medio": "300",
+      "plasticado_carta": "600"
+    },
+    "memoria": {
+      "capacidad": {
+        "4gb": "50", "8gb": "100", "16gb": "150", "32gb": "200", "64gb": "250", "128gb": "300"
+      },
+      "contenido": {
+        "capitulos": "5",
+        "musica": "100"
+      }
+    }
+  },
+  "contacto": {
+    "address": "Calle 79 entre 272 y 276, Matanzas, Cuba #27413B",
+    "phone": "+53 58682731",
+    "email": "sealpepe8@gmail.com",
+    "whatsapp_link": "https://wa.me/+5358682731"
+  },
+  "faq": [
+    { "q": "¿Hacen entregas a domicilio?", "a": "Actualmente trabajamos por encargo y recogida en nuestra ubicación. Contáctanos para evaluar casos especiales." },
+    { "q": "¿Qué formato de archivos aceptan para imprimir?", "a": "Aceptamos PDF, JPG, PNG y Word (.docx). Para mejores resultados, recomendamos enviar archivos en alta resolución." }
+  ]
+}
