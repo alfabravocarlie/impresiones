@@ -28,80 +28,348 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
-        /* --- TEMA PREMIUM --- */
+        /* --- TEMA PREMIUM (NEON & GLASSMORPHISM) --- */
         :root {
-            --primary-color: #00f2ff;
+            --primary-color: #00f2ff; /* Azul Neón */
             --secondary-color: #6c757d;
-            --accent-color: #7000ff;
-            --success-color: #00ff88;
-            --bg-dark: #0a0a12;
-            --glass-bg: rgba(255, 255, 255, 0.03);
+            --accent-color: #7000ff; /* Violeta Eléctrico */
+            --success-color: #00ff88; /* Verde Neón */
+            --info-color: #0dcaf0;
+            --warning-color: #ffc107;
+            --danger-color: #ff0055; /* Rojo Neón */
+            --bg-dark: #0a0a12; /* Fondo muy oscuro */
+            --glass-bg: rgba(255, 255, 255, 0.03); /* Cristal muy sutil */
             --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         html { scroll-behavior: smooth; }
-        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-dark); color: #e0e0e0; overflow-x: hidden; position: relative; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         h1, h2, h3, h4, h5, h6, .navbar-brand { font-family: 'Outfit', sans-serif !important; }
 
-        /* --- FONDO DE PARTÍCULAS --- */
-        #particles-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        
-        /* --- SCROLL PROGRESS --- */
-        #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); width: 0%; z-index: 10001; transition: width 0.1s; box-shadow: 0 0 10px var(--primary-color); }
-        
+        /* --- FONDO DE PARTÍCULAS (CANVAS) --- */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- SCROLL PROGRESS BAR --- */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--success-color));
+            width: 0%; z-index: 10001;
+            transition: width 0.1s;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
         /* --- PRELOADER --- */
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 9999; display: flex; justify-content: center; align-items: center; }
-        .loader { width: 48px; height: 48px; border: 3px solid transparent; border-top-color: var(--primary-color); border-bottom-color: var(--accent-color); border-radius: 50%; animation: rotation 1s linear infinite; box-shadow: 0 0 15px var(--primary-color); }
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .loader {
+            width: 48px; height: 48px;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-color);
+            border-bottom-color: var(--accent-color);
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
         @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- NAVEGACIÓN --- */
-        .navbar { background: rgba(10, 10, 18, 0.85); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.5); padding: 15px 0; border-bottom: 1px solid var(--glass-border); }
+        /* --- NAVEGACIÓN (GLASS) --- */
+        .navbar {
+            background: rgba(10, 10, 18, 0.85);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
         .navbar-brand { font-weight: 800; letter-spacing: -0.5px; background: -webkit-linear-gradient(45deg, #fff, #ccc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-link { font-weight: 500; color: #aaa !important; position: relative; transition: all 0.3s ease; padding: 8px 15px; border-radius: 20px; }
-        .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.1); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+        
+        .nav-link {
+            font-weight: 500; color: #aaa !important; position: relative; transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #fff !important;
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        }
 
-        /* --- HERO --- */
-        .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; background: radial-gradient(circle at center, rgba(10, 10, 18, 0) 0%, rgba(0,0,0,0.8) 100%), url('Logo.jpg') no-repeat center center; background-size: cover; background-attachment: fixed; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(10,10,18,0.8) 0%, rgba(10,10,18,0.4) 50%, rgba(10,10,18,0.9) 100%); z-index: 1; }
+        /* --- HERO SECTION --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(10, 10, 18, 0) 0%, rgba(0,0,0,0.8) 100%),
+                        url('Logo.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        /* Capa oscura sobre imagen para legibilidad */
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(10,10,18,0.8) 0%, rgba(10,10,18,0.4) 50%, rgba(10,10,18,0.9) 100%);
+            z-index: 1;
+        }
+        
         .hero-content { position: relative; z-index: 2; }
-        .hero-title { font-size: 4rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 0 0 30px rgba(0, 242, 255, 0.4); background: -webkit-linear-gradient(45deg, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: floatText 3s ease-in-out infinite; }
-        .typing-cursor { display: inline-block; width: 3px; height: 1.2em; background-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-color); animation: blink 0.7s infinite; vertical-align: middle; margin-left: 5px; }
         
-        /* --- SECCIONES COMUNES --- */
-        .section-title { position: relative; margin-bottom: 60px; padding-bottom: 20px; text-align: center; font-weight: 700; color: #fff; }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px; box-shadow: 0 0 10px var(--primary-color); }
-        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); padding: 50px; margin-bottom: 60px; position: relative; overflow: hidden; }
-        .glass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 25px; padding: 1px; background: linear-gradient(45deg, var(--primary-color), transparent, var(--accent-color)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box; -webkit-mask-composite: exclude; mask-composite: exclude; pointer-events: none; }
+        .hero-title {
+            font-size: 4rem; font-weight: 800; margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+            background: -webkit-linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: floatText 3s ease-in-out infinite;
+        }
         
-        /* --- BOTONES --- */
-        .magnetic-btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; z-index: 10; }
-        .btn-neon-light { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--primary-color); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-        .btn-neon-light:hover { background: rgba(0, 242, 255, 0.1); border-color: var(--primary-color); box-shadow: 0 0 30px rgba(0, 242, 255, 0.4); color: #fff; text-shadow: 0 0 10px var(--primary-color); }
-        
-        /* --- PRECIOS --- */
-        .price-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; margin-bottom: 30px; transition: all 0.1s ease; height: 100%; transform-style: preserve-3d; perspective: 1000px; position: relative; overflow: hidden; }
-        .price-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s; }
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .typing-cursor {
+            display: inline-block; width: 3px; height: 1.2em; background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+            animation: blink 0.7s infinite; vertical-align: middle; margin-left: 5px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- BOTÓN MAGNÉTICO (MAGNETIC BUTTON) --- */
+        .magnetic-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 15px 40px; border-radius: 50px; font-weight: 600;
+            text-decoration: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-neon-light {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+        }
+        .btn-neon-light:hover {
+            background: rgba(0, 242, 255, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .btn-neon-success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+        }
+        .btn-neon-success:hover {
+            background: var(--success-color);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+
+        /* --- TÍTULOS --- */
+        .section-title {
+            position: relative; margin-bottom: 60px; padding-bottom: 20px; text-align: center; font-weight: 700; color: #fff;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* --- ABOUT SECTION (GLASS) --- */
+        .about-section {
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 25px;
+            box-shadow: var(--glass-shadow); padding: 50px; margin-bottom: 60px;
+            position: relative; overflow: hidden;
+        }
+        /* Brillo esquinas */
+        .about-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 25px;
+            padding: 1px;
+            background: linear-gradient(45deg, var(--primary-color), transparent, var(--accent-color));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
+            -webkit-mask-composite: exclude; 
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .about-image-container {
+            display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3);
+            border-radius: 20px; padding: 10px; border: 1px solid var(--glass-border);
+        }
+        .about-image {
+            max-width: 100%; max-height: 400px; width: auto; height: auto;
+            object-fit: cover; border-radius: 15px;
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
+        .about-image:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); }
+
+        /* --- ICONOS FLOTANTES (NEON GLOW) --- */
+        .floating-icon {
+            font-size: 2.5rem; color: var(--primary-color);
+            display: inline-block;
+            animation: floatUp 3s ease-in-out infinite;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+        /* Retrasos escalonados para efecto ola */
+        .floating-icon:nth-child(1) { animation-delay: 0s; color: var(--success-color); text-shadow: 0 0 10px var(--success-color); }
+        .floating-icon:nth-child(2) { animation-delay: 0.5s; color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
+        .floating-icon:nth-child(3) { animation-delay: 1s; color: var(--warning-color); text-shadow: 0 0 10px var(--warning-color); }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- TARJETAS (GLASS + 3D TILT) --- */
+        .price-card {
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 30px; margin-bottom: 30px; transition: all 0.1s ease;
+            height: 100%; transform-style: preserve-3d; perspective: 1000px;
+            position: relative; overflow: hidden;
+        }
+        /* Brillo interior al hover */
+        .price-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.5s;
+        }
         .price-card:hover::after { opacity: 1; }
-        .price-card:hover { box-shadow: 0 0 30px rgba(0, 242, 255, 0.2), inset 0 0 20px rgba(0, 242, 255, 0.05); border-color: rgba(0, 242, 255, 0.3); }
-        .price-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        .price-card:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            border-color: rgba(0, 242, 255, 0.3);
+        }
+
+        .price-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
         .price-item:last-child { border-bottom: none; }
         .price { font-weight: 700; color: var(--primary-color); font-size: 1.3rem; text-shadow: 0 0 10px var(--primary-color); }
 
-        /* --- UTILIDADES --- */
-        #scrollTopBtn { position: fixed; bottom: 30px; left: 30px; background: var(--accent-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 0 15px var(--accent-color); }
-        #scrollTopBtn.show { opacity: 1; visibility: visible; }
+        /* --- EQUIPO (TEAM) --- */
+        .team-member {
+            text-align: center; padding: 30px; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            backdrop-filter: blur(20px); transition: transform 0.3s ease; height: 100%;
+        }
+        .team-member:hover { transform: translateY(-10px); border-color: var(--accent-color); }
+        .team-avatar {
+            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 20px; border: 3px solid var(--accent-color); padding: 3px;
+            box-shadow: 0 0 15px var(--accent-color);
+        }
 
-        @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } }
+        /* --- ESTADÍSTICAS --- */
+        .stats-section {
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
+            color: white; padding: 60px 0; margin-bottom: 60px; position: relative;
+        }
+        .stat-item h3 { font-size: 3.5rem; font-weight: 800; color: var(--success-color); margin-bottom: 0; text-shadow: 0 0 20px var(--success-color); }
+        .stat-item p { font-size: 1.2rem; margin-bottom: 0; color: #bbb; }
+
+        /* --- BUSCADOR --- */
+        .search-container-card {
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); padding: 40px; border-radius: 25px;
+            box-shadow: var(--glass-shadow);
+        }
+        .search-result-item {
+            padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s; cursor: pointer;
+            border-radius: 10px; margin-bottom: 5px;
+        }
+        .search-result-item:hover { background: rgba(255,255,255,0.08); }
+        .search-result-item:last-child { border-bottom: none; }
+
+        /* --- TESTIMONIOS --- */
+        .testimonial-card {
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 40px; margin: 20px; transition: all 0.3s ease;
+        }
+        .testimonial-card:hover { border-color: var(--primary-color); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
+
+        /* --- FAQ --- */
+        .accordion-button:not(.collapsed) { 
+            background-color: rgba(0, 242, 255, 0.15); 
+            color: var(--primary-color); 
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); 
+            font-weight: 600;
+        }
+        .accordion-item { border: 1px solid var(--glass-border); border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
+        .accordion-button { background: transparent; color: #ccc; }
+        .accordion-button:focus { box-shadow: none; border: none; }
+
+        /* --- PAGOS --- */
+        .payment-method {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 15px; transition: all 0.3s ease;
+        }
+        .payment-method:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--success-color);
+            background: rgba(0, 255, 136, 0.05);
+        }
+        .payment-icon { font-size: 2.5rem; margin-bottom: 10px; filter: drop-shadow(0 0 5px currentColor); }
+
+        /* --- FOOTER --- */
+        .footer { background-color: #050508; color: #888; padding: 60px 0 20px; border-top: 1px solid var(--glass-border); margin-top: 80px; }
+        .footer a { color: #aaa; text-decoration: none; transition: all 0.3s ease; }
+        .footer a:hover { color: var(--primary-color); text-shadow: 0 0 10px var(--primary-color); }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .stat-item h3 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- FONDO DE PARTÍCULAS -->
     <canvas id="particles-canvas"></canvas>
-    <div id="progress-bar"></div>
-    <div id="preloader"><div class="loader"></div></div>
-    <div id="scrollTopBtn" onclick="scrollToTop()"><i class="bi bi-arrow-up-short"></i></div>
 
-    <!-- NAVEGACIÓN -->
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="progress-bar"></div>
+
+    <!-- PRELOADER -->
+    <div id="preloader"><div class="loader"></div></div>
+
+    <!-- BOTONES FLOTANTES -->
+    <div id="scrollTopBtn" onclick="scrollToTop()" style="position: fixed; bottom: 30px; left: 30px; background: var(--accent-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 0 15px var(--accent-color);"><i class="bi bi-arrow-up-short"></i></div>
+
+    <!-- === NAVEGACIÓN === -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#inicio"><i class="bi bi-printer-fill me-2"></i> Calidad Inigualable</a>
@@ -124,38 +392,39 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- === HERO SECTION === -->
     <section id="inicio" class="hero-section">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <h1 class="hero-title mb-3" id="hero-title-text">Cargando...</h1>
-            <h2 class="display-6 fw-light mb-4">
+            <h1 class="hero-title mb-3">Impresiones y Memorias Anita y Ale</h1>
+            <h2 class="display-6 fw-light mb-4" style="font-weight: 300;">
                 <span id="typewriter-text"></span><span class="typing-cursor">|</span>
             </h2>
             <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-5">
                 <a href="https://alfabravocarlie.github.io/Cargue/" target="_blank" class="magnetic-btn btn-neon-light btn-lg">
-                    <i class="bi bi-box-seam me-2"></i> <span id="hero-btn-1">Ver Catálogo</span>
+                    <i class="bi bi-box-seam me-2"></i> Ver Catálogo
                 </a>
                 <a href="#servicios" class="magnetic-btn btn-neon-success btn-lg">
-                    <i class="bi bi-collection-play me-2"></i> <span id="hero-btn-2">Servicios</span>
+                    <i class="bi bi-collection-play me-2"></i> Servicios
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- NOSOTROS -->
+    <!-- === SOBRE NOSOTROS === -->
     <section id="nosotros" class="container my-5 py-5">
         <h2 class="section-title" data-aos="fade-up"><span id="about-title-text">Acerca de Nosotros</span></h2>
-        <div class="glass-card shadow-sm" data-aos="fade-up" data-aos-delay="100">
+        <div class="about-section shadow-sm" data-aos="fade-up" data-aos-delay="100">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-                    <div style="display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 10px; border: 1px solid var(--glass-border);">
-                        <img src="" id="about-img" alt="Nuestra oficina" style="max-width: 100%; max-height: 400px; width: auto; height: auto; object-fit: cover; border-radius: 15px;">
+                    <div class="about-image-container">
+                        <img src="Impresiones.jpg" alt="Nuestra oficina" class="about-image" id="about-img">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <h3 class="mb-4 fw-bold" style="background: -webkit-linear-gradient(45deg, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bienvenidos a tu mejor opción en Matanzas</h3>
                     <p class="mb-4" style="color: #bbb;" id="about-desc-text">Cargando...</p>
+                    
                     <h5 class="mb-3" style="color: var(--primary-color);">¿Por qué elegirnos?</h5>
                     <ul class="list-unstyled mb-4">
                         <li class="mb-3 d-flex align-items-center">
@@ -176,31 +445,31 @@
         </div>
     </section>
 
-    <!-- EQUIPO -->
+    <!-- === EQUIPO === -->
     <section id="equipo" class="container my-5 py-5">
         <h2 class="section-title" data-aos="fade-up">Nuestro Equipo</h2>
         <div class="row g-4">
             <div class="col-md-6" data-aos="fade-right">
-                <div class="glass-card h-100 text-center" style="padding: 30px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); transition: transform 0.3s ease;">
-                    <img src="" id="team-img-1" alt="Anita" class="mb-3 rounded-circle" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid var(--primary-color);">
+                <div class="team-member">
+                    <img src="" id="team-img-1" alt="Anita" class="team-avatar">
                     <h4 id="team-name-1">Cargando...</h4>
                     <p class="fw-bold" style="color: var(--primary-color);" id="team-role-1">...</p>
-                    <p style="font-size: 0.9rem; color: #999;">Cargando...</p>
+                    <p style="font-size: 0.9rem; color: #999;" id="team-desc-1">...</p>
                 </div>
             </div>
             <div class="col-md-6" data-aos="fade-left">
-                <div class="glass-card h-100 text-center" style="padding: 30px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); transition: transform 0.3s ease;">
-                    <img src="" id="team-img-2" alt="Ale" class="mb-3 rounded-circle" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid var(--accent-color);">
+                <div class="team-member">
+                    <img src="" id="team-img-2" alt="Ale" class="team-avatar">
                     <h4 id="team-name-2">Cargando...</h4>
                     <p class="fw-bold" style="color: var(--success-color);" id="team-role-2">...</p>
-                    <p style="font-size: 0.9rem; color: #999;">Cargando...</p>
+                    <p style="font-size: 0.9rem; color: #999;" id="team-desc-2">...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ESTADISTICAS -->
-    <section id="estadisticas" class="glass-card mx-3 my-5 py-5" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 60px 0;">
+    <!-- === ESTADÍSTICAS === -->
+    <section id="estadisticas" class="stats-section rounded-3 mx-3">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4 mb-4 mb-md-0 stat-item" data-aos="fade-up" data-aos-delay="0">
@@ -222,7 +491,7 @@
         </div>
     </section>
 
-    <!-- SERVICIOS -->
+    <!-- === SERVICIOS === -->
     <section id="servicios" class="container my-5 py-5">
         <h2 class="section-title" data-aos="fade-up">Nuestros Servicios</h2>
         
@@ -276,43 +545,280 @@
         </div>
     </section>
 
-    <!-- BUSCADOR (Simplificado para el ejemplo) -->
+    <!-- === BUSCADOR DE CATÁLOGO === -->
     <section id="buscador" class="container my-5 py-5">
         <h2 class="section-title" data-aos="fade-up">Buscador de Catálogo</h2>
         <div class="row justify-content-center">
             <div class="col-lg-8" data-aos="fade-up">
-                <div class="glass-card" style="padding: 40px;">
+                <div class="search-container-card">
+                    <p class="text-center mb-4" style="color: #bbb;">Escribe el nombre de la novela, película o serie que buscas:</p>
                     <div class="input-group mb-4">
-                        <input type="text" class="form-control form-control-lg" id="catalogSearchInput" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;" placeholder="Buscar...">
-                        <button class="btn btn-primary px-4" type="button" style="background: var(--accent-color); border: none;"><i class="bi bi-search"></i></button>
+                        <input type="text" class="form-control form-control-lg" id="catalogSearchInput" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;" placeholder="Ej: El Chema, Los Soprano...">
+                        <button class="btn btn-primary px-4" type="button" id="searchBtn" style="background: var(--accent-color); border: none; box-shadow: 0 0 10px var(--accent-color);"><i class="bi bi-search"></i></button>
                     </div>
+                    
                     <div id="searchResultsArea" class="rounded p-3" style="max-height: 400px; overflow-y: auto; display: none; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="container my-5 py-5">
-        <h2 class="section-title" data-aos="fade-up">Contáctanos</h2>
-        <div class="row g-5">
-            <div class="col-lg-6" data-aos="fade-right">
-                <div class="glass-card h-100" style="padding: 40px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);">
-                    <h3 class="mb-4 fw-bold">Información</h3>
-                    <div class="contact-info mb-4">
-                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-geo-alt-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-address">...</span></div>
-                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-telephone-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-phone">...</span></div>
-                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-envelope-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-email">...</span></div>
+    <!-- === TESTIMONIOS === -->
+    <section id="testimonios" class="container my-5 py-5">
+        <h2 class="section-title" data-aos="fade-up">Lo que dicen nuestros clientes</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center">
+                        <div class="testimonial-card w-75 text-center">
+                            <p class="fst-italic mb-4" style="color: #ccc;">"Excelente servicio. Rápido, profesional y con precios muy competitivos. Definitivamente volveré."</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img src="https://picsum.photos/seed/person1/80/80.jpg" alt="Pedro L." class="testimonial-avatar me-3">
+                                <div><strong>Pedro L.</strong><br><small class="text-muted">Cliente satisfecho</small></div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="#" id="contact-whatsapp" target="_blank" class="magnetic-btn btn-neon-success w-100 rounded-pill" style="border-radius: 30px; padding: 15px;">
-                        <i class="bi bi-whatsapp"></i> Enviar WhatsApp
-                    </a>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+                        <div class="testimonial-card w-75 text-center">
+                            <p class="fst-italic mb-4" style="color: #ccc;">"La mejor opción en Matanzas para llenar memorias USB. Tienen una gran variedad de contenido y el servicio es excelente."</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img src="https://picsum.photos/seed/person2/80/80.jpg" alt="María J." class="testimonial-avatar me-3">
+                                <div><strong>María J.</strong><br><small class="text-muted">Cliente satisfecho</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+                        <div class="testimonial-card w-75 text-center">
+                            <p class="fst-italic mb-4" style="color: #ccc;">"He utilizado sus servicios tanto para impresión como para llenado de memorias y siempre he quedado muy satisfecho. ¡Recomendado!"</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img src="https://picsum.photos/seed/person3/80/80.jpg" alt="Luis A." class="testimonial-avatar me-3">
+                                <div><strong>Luis A.</strong><br><small class="text-muted">Cliente satisfecho</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon rounded-circle" style="background: var(--accent-color); width: 50px; height: 50px;" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon rounded-circle" style="background: var(--accent-color); width: 50px; height: 50px;" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- === PREGUNTAS FRECUENTES === -->
+    <section id="faq" class="container my-5 py-5">
+        <h2 class="section-title" data-aos="fade-up">Preguntas Frecuentes</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item mb-3 shadow-sm rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                ¿Hacen entregas a domicilio?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Actualmente trabajamos por encargo y recogida en nuestra ubicación. Contáctanos para evaluar casos especiales.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3 shadow-sm rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                ¿Qué formato de archivos aceptan para imprimir?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Aceptamos PDF, JPG, PNG y Word (.docx). Para mejores resultados, recomendamos enviar archivos en alta resolución.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <a href="#" id="footer-whatsapp" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background-color: var(--success-color); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; box-shadow: 0 0 20px var(--success-color); text-decoration: none;"><i class="bi bi-whatsapp"></i></a>
+    <!-- === SECCIÓN DE CONTACTO === -->
+    <section id="contacto" class="container my-5 py-5">
+        <h2 class="section-title" data-aos="fade-up">Contáctanos</h2>
+        
+        <div class="row g-5">
+            <!-- Formulario -->
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="p-4 p-md-5 rounded-4 h-100" style="background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);">
+                    <h3 class="mb-4 fw-bold">Solicitar Servicio</h3>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tipo de Servicio</label>
+                            <select class="form-select" id="serviceType" required style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;">
+                                <option value="" selected disabled>Selecciona...</option>
+                                <option value="impresion">Impresión / Fotocopia</option>
+                                <option value="memoria">Llenado de Memoria USB</option>
+                            </select>
+                        </div>
+
+                        <div id="printingOptions" class="d-none">
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de impresión</label>
+                                <select class="form-select" id="printingSubtype" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;">
+                                    <option value="" selected disabled>Selecciona...</option>
+                                    <option value="imprimir">Imprimir</option>
+                                    <option value="fotocopiar">Fotocopiar</option>
+                                </select>
+                            </div>
+                            <div class="alert alert-warning d-none" id="printingAlert" style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); color: #ffc107;">
+                                <small>💡 Envíanos el documento a imprimir por WhatsApp después de enviar el formulario.</small>
+                            </div>
+                        </div>
+                        
+                        <div id="memoryOptions" class="d-none">
+                            <div class="mb-3">
+                                <label class="form-label">Capacidad de la memoria</label>
+                                <select class="form-select" id="memoryCapacity" style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;">
+                                    <option value="" selected disabled>Selecciona capacidad...</option>
+                                    <option value="4">4 GB</option><option value="8">8 GB</option><option value="16">16 GB</option><option value="32">32 GB</option><option value="64">64 GB</option><option value="128">128 GB</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+                        <div class="mb-3">
+                            <label class="form-label">Tu Nombre</label>
+                            <input type="text" class="form-control" id="clientName" required style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tu Teléfono</label>
+                            <input type="tel" class="form-control" id="clientPhone" required style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: #fff;">
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="button" id="submitRequest" class="magnetic-btn btn-neon-success w-100" style="border-radius: 30px;">
+                                <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Info + Pagos -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="p-4 p-md-5 rounded-4 h-100" style="background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);">
+                    <h3 class="mb-4 fw-bold">Información y Pagos</h3>
+                    
+                    <div class="contact-info mb-4">
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-geo-alt-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-address">...</span></div>
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-telephone-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-phone">...</span></div>
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-envelope-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-email">...</span></div>
+                    </div>
+
+                    <h5 class="mb-3 fw-bold" style="color: var(--success-color);">Métodos de Pago</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-credit-card payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Transfermóvil</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-wallet2 payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Enzona</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-phone-vibrate payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Etecsa</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-cash payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Efectivo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ESTE ES EL BOTÓN QUE FALTABA Y CAUSA EL ERROR -->
+                    <div class="text-center mt-4">
+                        <a href="#" id="contact-whatsapp" target="_blank" class="magnetic-btn btn-neon-success w-100" style="border-radius: 30px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 15px;">
+                            <i class="bi bi-whatsapp me-2"></i> Enviar WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="ratio ratio-16x9 rounded-3 overflow-hidden mt-3">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8475633424166!2d-81.58565788509926!3d23.04927818494338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f1c7e5b1b1b1b1%3A0x1b1b1b1b1b1b!2sCalle%2079%20%26%20Calle%20272%2C%20Matanzas%2C%20Cuba!5e0!3m2!1ses!2s!4v1234567890" allowfullscreen loading="lazy" style="filter: invert(90%) hue-rotate(180deg);"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            
+            <!-- Info + Pagos -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="p-4 p-md-5 rounded-4 h-100" style="background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);">
+                    <h3 class="mb-4 fw-bold">Información y Pagos</h3>
+                    
+                    <div class="contact-info mb-4">
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-geo-alt-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-address">...</span></div>
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-telephone-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-phone">...</span></div>
+                        <div class="mb-3" style="color: #ccc;"><i class="bi bi-envelope-fill me-2" style="color: var(--primary-color);"></i> <span id="contact-email">...</span></div>
+                    </div>
+
+                    <h5 class="mb-3 fw-bold" style="color: var(--success-color);">Métodos de Pago</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-credit-card payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Transfermóvil</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-wallet2 payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Enzona</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-phone-vibrate payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Etecsa</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="payment-method">
+                                <i class="bi bi-cash payment-icon" style="color: var(--primary-color);"></i>
+                                <span class="payment-name">Efectivo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.8475633424166!2d-81.58565788509926!3d23.04927818494338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f1c7e5b1b1b1b1%3A0x1b1b1b1b1b1b!2sCalle%2079%20%26%20Calle%20272%2C%20Matanzas%2C%20Cuba!5e0!3m2!1ses!2s!4v1234567890" allowfullscreen loading="lazy" style="filter: invert(90%) hue-rotate(180deg);"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="mb-2">&copy; 2025 Impresiones y Llenado de Memorias Anita y Ale.</p>
+            <p class="mb-4">Hecho con ❤️ en Matanzas</p>
+            <div>
+                <a href="https://wa.me/+5358682731" target="_blank" class="mx-2"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                <a href="https://alfabravocarlie.github.io/Cargue/" target="_blank" class="mx-2"><i class="bi bi-github"></i> GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="footer-whatsapp" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background-color: var(--success-color); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; box-shadow: 0 0 20px var(--success-color); text-decoration: none; transition: transform 0.3s;"><i class="bi bi-whatsapp"></i></a>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -322,37 +828,167 @@
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
 
-        // --- PRELOADER Y ANIMACIONES ---
-        window.addEventListener('load', () => { document.getElementById('preloader').style.opacity = '0'; setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 500); });
-        
-        // Typewriter (Simplificado para no chocar con JSON)
+        // --- ANIMACIÓN DE PARTÍCULAS (CANVAS) ---
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 60; // Cantidad ajustada para rendimiento en PCs lentas
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 242, 255, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar líneas entre partículas cercanas
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 242, 255, ${1 - distance / 100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+        });
+
+        // Typewriter Effect
+        const textElement = document.getElementById('typewriter-text');
         const phrases = ["Transformamos tus ideas", "Calidad Inigualable", "Matanzas, Cuba"];
         let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
         function type() {
             const currentPhrase = phrases[phraseIndex];
-            if (isDeleting) { document.getElementById('typewriter-text').textContent = currentPhrase.substring(0, charIndex - 1); charIndex--; } 
-            else { document.getElementById('typewriter-text').textContent = currentPhrase.substring(0, charIndex + 1); charIndex++; }
+            if (isDeleting) { textElement.textContent = currentPhrase.substring(0, charIndex - 1); charIndex--; } 
+            else { textElement.textContent = currentPhrase.substring(0, charIndex + 1); charIndex++; }
             if (!isDeleting && charIndex === currentPhrase.length) { isDeleting = true; setTimeout(type, 2000); } 
             else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex +1) % phrases.length; setTimeout(type, 500); } 
             else { setTimeout(type, isDeleting ? 50 :100); }
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // --- CARGAR Y RENDERIZAR CONTENIDO (EL CORAZÓN DEL CMS) ---
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            counter.innerText = '0';
+            const updateCounter = () => {
+                const target = +counter.getAttribute('data-target');
+                const c = +counter.innerText;
+                const increment = target / 200;
+                if (c < target) { counter.innerText = `${Math.ceil(c + increment)}`; setTimeout(updateCounter, 20); } 
+                else { counter.innerText = target + (target < 100 ? "+" : "+"); }
+            };
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if(entry.isIntersecting) { updateCounter(); observer.unobserve(entry.target); } })
+            });
+            observer.observe(counter);
+        });
+
+        // 3D Tilt Effect
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                card.style.transform = `perspective(1000px) rotateX(${(y - rect.height / 2) / 20}deg) rotateY(${-(x - rect.width / 2) / 20}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)'; });
+        });
+
+        // --- MAGNETIC BUTTON EFFECT ---
+        const magnets = document.querySelectorAll('.magnetic-btn');
+        magnets.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0px, 0px)'; });
+        });
+
+        // Scroll Progress Bar & Scroll Top
+        const scrollBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+            
+            if (winScroll > 300) { scrollBtn.classList.add("show"); }
+            else { scrollBtn.classList.remove("show"); }
+        };
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+        // --- NUEVO: VARIABLES GLOBALES PARA DATOS ---
+        let catalogData = null; // Para el buscador
+        let contentData = null; // Para los precios y contenidos (PARA DESCARGAR)
+
+        // --- FUNCIÓN: CARGAR Y RENDERIZAR CONTENIDO (INTEGRACIÓN CON JSON) ---
         async function loadContentAndRender() {
             try {
                 const response = await fetch('content.json');
                 const data = await response.json();
                 
+                // GUARDAR EN GLOBAL PARA PODER DESCARGAR DESPUÉS
+                contentData = data; 
+
                 // 1. HERO
-                document.getElementById('hero-title-text').innerText = data.hero.title;
-                document.getElementById('hero-btn-1').innerText = data.hero.cta_primary;
-                document.getElementById('hero-btn-2').innerText = data.hero.cta_secondary;
+                // El título está fijo en el HTML, pero los botones podrían actualizarse si se quisiera.
+                // document.getElementById('hero-btn-1').innerText = data.hero.cta_primary;
+                // document.getElementById('hero-btn-2').innerText = data.hero.cta_secondary;
 
                 // 2. ABOUT
                 document.getElementById('about-title-text').innerText = data.about.title;
                 document.getElementById('about-desc-text').innerText = data.about.description;
                 document.getElementById('about-img').src = data.about.image_url;
+                
+                // Features
                 document.getElementById('feat-1').innerHTML = `<strong>${data.about.features[0].title}:</strong> ${data.about.features[0].desc}`;
                 document.getElementById('feat-2').innerHTML = `<strong>${data.about.features[1].title}:</strong> ${data.about.features[1].desc}`;
                 document.getElementById('feat-3').innerHTML = `<strong>${data.about.features[2].title}:</strong> ${data.about.features[2].desc}`;
@@ -361,20 +997,19 @@
                 if(data.team) {
                     document.getElementById('team-name-1').innerText = data.team[0].name;
                     document.getElementById('team-role-1').innerText = data.team[0].role;
-                    // Generar avatar basado en el nombre (placeholder)
+                    document.getElementById('team-desc-1').innerText = data.team[0].desc;
+                    // Avatar generado
                     document.getElementById('team-img-1').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.team[0].name)}&background=0D6EFD&color=fff`;
-                    
+
                     if(data.team[1]) {
                         document.getElementById('team-name-2').innerText = data.team[1].name;
                         document.getElementById('team-role-2').innerText = data.team[1].role;
+                        document.getElementById('team-desc-2').innerText = data.team[1].desc;
                         document.getElementById('team-img-2').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.team[1].name)}&background=25D366&color=fff`;
-                        // Actualizar textos de la tarjeta
-                        document.querySelector('#team-img-1').nextElementSibling.innerHTML = `<p style="font-size: 0.9rem; color: #999;">${data.team[0].desc}</p>`;
-                        document.querySelector('#team-img-2').nextElementSibling.innerHTML = `<p style="font-size: 0.9rem; color: #999;">${data.team[1].desc}</p>`;
                     }
                 }
 
-                // 4. STATS (Números)
+                // 4. STATS
                 document.getElementById('stat-clients-num').innerText = data.stats.clients + '+';
                 document.getElementById('stat-mem-num').innerText = data.stats.memories + '+';
                 document.getElementById('stat-years-num').innerText = data.stats.years + '+';
@@ -392,6 +1027,15 @@
                 updatePrice('price-plas-medio', data.precios.impresion.plasticado_medio);
                 updatePrice('price-plas-carta', data.precios.impresion.plasticado_carta);
 
+                updatePrice('price-mem-4gb', data.precios.memoria.capacidad['4gb']);
+                updatePrice('price-mem-8gb', data.precios.memoria.capacidad['8gb']);
+                updatePrice('price-mem-16gb', data.precios.memoria.capacidad['16gb']);
+                updatePrice('price-mem-32gb', data.precios.memoria.capacidad['32gb']);
+                updatePrice('price-mem-64gb', data.precios.memoria.capacidad['64gb']);
+                updatePrice('price-mem-128gb', data.precios.memoria.capacidad['128gb']);
+                updatePrice('price-cont-capitulos', '$' + data.precios.memoria.contenido.capitulos + ' c/u');
+                updatePrice('price-cont-musica', '$' + data.precios.memoria.contenido.musica + ' / GB');
+
                 // 6. CONTACTO
                 document.getElementById('contact-address').innerText = data.contacto.address;
                 document.getElementById('contact-phone').innerText = data.contacto.phone;
@@ -399,52 +1043,153 @@
                 document.getElementById('contact-whatsapp').href = data.contacto.whatsapp_link;
 
             } catch (error) {
-                console.error("Error cargando contenido:", error);
-                // Si falla, dejar textos por defecto o manejar error visual
+                console.error("Error cargando content.json:", error);
+                // En caso de error (o primera carga), mostramos textos por defecto
             }
         }
 
-        // Llamar al cargar la página
-        window.addEventListener('DOMContentLoaded', loadContentAndRender);
-
-        // --- PARTÍCULAS Y MAGNÉTICOS (Mismos Scripts de antes) ---
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = []; const particleCount = 60;
-        class Particle { constructor(){ this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5; this.size = Math.random()*2+1;} update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width) this.vx*=-1; if(this.y<0||this.y>canvas.height) this.vy*=-1;} draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle='rgba(0,242,255,0.5)'; ctx.fill(); }}
-        for(let i=0;i<particleCount;i++) particles.push(new Particle());
-        function animateParticles(){ ctx.clearRect(0,0,canvas.width,canvas.height); for(let i=0;i<particles.length;i++){ particles[i].update(); particles[i].draw(); for(let j=i;j<particles.length;j++){ const dx=particles[i].x-particles[j].x; const dy=particles[i].y-particles[j].y; const distance=Math.sqrt(dx*dx+dy*dy); if(distance<100){ ctx.beginPath(); ctx.strokeStyle=`rgba(0,242,255,${1-distance/100})`; ctx.lineWidth=0.5; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } requestAnimationFrame(animateParticles); }
-        animateParticles(); window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
-
-        // 3D Tilt
-        const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach(card => { card.addEventListener('mousemove', e => { const r=card.getBoundingClientRect(); const x=e.clientX-r.left; const y=e.clientY-r.top; card.style.transform=`perspective(1000px) rotateX(${(y-r.height/2)/20}deg) rotateY(${-(x-r.width/2)/20}deg) scale3d(1.02,1.02,1.02)`; }); card.addEventListener('mouseleave', () => { card.style.transform='perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)'; }); });
-
-        // Magnetic Buttons
-        const magnets = document.querySelectorAll('.magnetic-btn');
-        magnets.forEach(btn => { btn.addEventListener('mousemove', e => { const r=btn.getBoundingClientRect(); const x=e.clientX-r.left-r.width/2; const y=e.clientY-r.top-r.height/2; btn.style.transform=`translate(${x*0.3}px,${y*0.5}px)`; }); btn.addEventListener('mouseleave', () => { btn.style.transform='translate(0px,0px)'; }); });
-
-        // Scroll
-        window.onscroll = function(){ let winScroll=document.body.scrollTop||document.documentElement.scrollTop; let height=document.documentElement.scrollHeight-document.documentElement.clientHeight; let scrolled=(winScroll/height)*100; document.getElementById("progress-bar").style.width=scrolled+"%"; if(winScroll>300) document.getElementById("scrollTopBtn").classList.add("show"); else document.getElementById("scrollTopBtn").classList.remove("show"); };
-        function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
-
-        // --- LÓGICA DE BÚSQUEDA Y DESCARGA (Ajustada para content.json) ---
-        const searchInput = document.getElementById('catalogSearchInput'); const resultsArea = document.getElementById('searchResultsArea'); let catalogData = null; let searchTimeout = null;
-        
-        fetch('directory_structure.json').then(res => res.json()).then(data => { catalogData=data; }).catch(err => {});
-        function performSearch(){ const q=searchInput.value.toLowerCase().trim(); if(!q){ resultsArea.style.display='none'; return;} if(!catalogData) return; const results=[]; function searchRecursive(items, path=""){ items.forEach(item=>{ const p=path?`${path}>${item.name}`:item.name; if(item.name.toLowerCase().includes(q)){ results.push({...item, path:p});} if(item.children){searchRecursive(item.children,p);}});} searchRecursive(catalogData.children); resultsArea.innerHTML=''; if(results.length===0) resultsArea.innerHTML='<div class="text-center text-muted">No se encontraron resultados.</div>'; else { results.forEach(res=>{ const div=document.createElement('div'); div.className='search-result-item p-2 rounded mb-1' style='background:rgba(0,0,0,0.3); cursor:pointer'; div.innerHTML=`${res.name}<br><small class="text-muted" style="font-size:0.7rem;">${res.path}</small>`; resultsArea.appendChild(div);}); } resultsArea.style.display='block'; }
-        searchInput.addEventListener('input',()=>{ clearTimeout(searchTimeout); searchTimeout=setTimeout(performSearch,300); });
-
-        // Descargar Precios (Lee del JSON actual)
+        // --- FUNCIÓN DESCARGAR PRECIOS (LEIDA DESDE JSON GLOBAL) ---
         function downloadPrices(e) {
             e.preventDefault();
-            if(window.contentData) { // Aprovechamos la variable global que cargamos arriba
-                const d = window.contentData.precios;
-                const c = `LISTA DE PRECIOS\n\nIMPRESIONES:\nTexto B/N: $${d.impresion.texto_bn}\nTexto Color: $${d.impresion.texto_color}\nImagen B/N: $${d.impresion.imagen_bn}\n... (etc)`;
-                const blob = new Blob([c], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='Precios.txt'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-            } else { alert("Espera a que carguen los precios en la página."); }
+            
+            // Usamos la variable global contentData que cargamos en loadContentAndRender
+            if(!contentData) {
+                alert("Espera a que carguen los precios en la página.");
+                return;
+            }
+
+            const d = contentData.precios;
+            
+            // Usamos comillas simples para evitar errores de sintaxis
+            const c = "LISTA DE PRECIOS - ANITA Y ALE (Actualizado)\n\n" +
+                        "SERVICIOS DE IMPRESIÓN:\n" +
+                        "- Texto B/N: $" + d.impresion.texto_bn + "\n" +
+                        "- Texto Color: $" + d.impresion.texto_color + "\n" +
+                        "- Imágenes B/N: $" + d.impresion.imagen_bn + "\n" +
+                        "- Imágenes Color: $" + d.impresion.imagen_color + "\n" +
+                        "- Fotocopias B/N: $" + d.impresion.fotocopia_bn + "\n" +
+                        "- Fotocopias Color: $" + d.impresion.fotocopia_color + "\n" +
+                        "- Edición: $" + d.impresion.edicion + "\n" +
+                        "- Plasticado Carnet: $" + d.impresion.plasticado_carnet + "\n" +
+                        "- Plasticado 1/2 Carta: $" + d.impresion.plasticado_medio + "\n" +
+                        "- Plasticado Carta: $" + d.impresion.plasticado_carta + "\n\n" +
+                        "MEMORIAS USB:\n" +
+                        "- 4 GB: $" + d.memoria.capacidad['4gb'] + "\n" +
+                        "- 8 GB: $" + d.memoria.capacidad['8gb'] + "\n" +
+                        "- 16 GB: $" + d.memoria.capacidad['16gb'] + "\n" +
+                        "- 32 GB: $" + d.memoria.capacidad['32gb'] + "\n" +
+                        "- 64 GB: $" + d.memoria.capacidad['64gb'] + "\n" +
+                        "- 128 GB: $" + d.memoria.capacidad['128gb'] + "\n" +
+                        "- Capítulos Novelas: $" + d.memoria.contenido.capitulos + " c/u\n" +
+                        "- Música: $" + d.memoria.contenido.musica + " / GB";
+
+            // Crear Blob para descarga
+            const blob = new Blob([c], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Lista_de_Precios_Ale_y_Anita.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
+
+        // --- BÚSQUEDA EN VIVO (OPTIMIZADA) ---
+        const searchInput = document.getElementById('catalogSearchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultsArea = document.getElementById('searchResultsArea');
+        let searchTimeout = null;
+
+        fetch('directory_structure.json')
+            .then(response => response.json())
+            .then(data => {
+                catalogData = data;
+                console.log("Catálogo cargado en memoria.");
+            })
+            .catch(err => {
+                resultsArea.innerHTML = '<div class="text-danger text-center">No se pudo cargar el catálogo. Asegúrate de ejecutar el servidor local.</div>';
+                resultsArea.style.display = 'block';
+            });
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) { resultsArea.style.display = 'none'; return; }
+            if (!catalogData) return;
+
+            const results = [];
+            function searchRecursive(items, parentPath = "") {
+                items.forEach(item => {
+                    const currentPath = parentPath ? `${parentPath} > ${item.name}` : item.name;
+                    if (item.name.toLowerCase().includes(query)) {
+                        results.push({ name: item.name, type: item.type, path: currentPath });
+                    }
+                    if (item.children) { searchRecursive(item.children, currentPath); }
+                });
+            }
+            searchRecursive(catalogData.children);
+            renderResults(results);
+        }
+
+        function renderResults(results) {
+            resultsArea.innerHTML = '';
+            if (results.length === 0) { resultsArea.innerHTML = '<div class="text-center text-muted">No se encontraron resultados.</div>'; }
+            else {
+                results.forEach(res => {
+                    const typeClass = res.type === 'folder' ? 'type-folder' : 'type-file';
+                    const typeLabel = res.type === 'folder' ? 'Serie/Carpeta' : 'Capítulo/Archivo';
+                    const div = document.createElement('div');
+                    div.className = 'search-result-item';
+                    div.innerHTML = `<span class="${typeClass === 'type-folder' ? 'badge' : ''}">${typeLabel}</span> ${res.name} <br><small style="color: #999;">${res.path}</small>`;
+                    resultsArea.appendChild(div);
+                });
+            }
+            resultsArea.style.display = 'block';
+        }
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => { performSearch(); }, 300);
+        });
+        searchBtn.addEventListener('click', performSearch);
+
+        // --- INICIALIZACIÓN ---
+        // Llamar a la función de carga al inicio
+        window.addEventListener('DOMContentLoaded', function() {
+            loadContentAndRender();
+            
+            // Form Logic
+            const serviceType = document.getElementById('serviceType');
+            const printingOptions = document.getElementById('printingOptions');
+            const memoryOptions = document.getElementById('memoryOptions');
+            const submitBtn = document.getElementById('submitRequest');
+
+            serviceType.addEventListener('change', function() {
+                printingOptions.classList.add('d-none');
+                memoryOptions.classList.add('d-none');
+                if (this.value === 'impresion') printingOptions.classList.remove('d-none');
+                else if (this.value === 'memoria') memoryOptions.classList.remove('d-none');
+            });
+
+            document.getElementById('printingSubtype').addEventListener('change', function() {
+                if (this.value) document.getElementById('printingAlert').classList.remove('d-none');
+                else document.getElementById('printingAlert').classList.add('d-none');
+            });
+
+            submitBtn.addEventListener('click', function() {
+                const clientName = document.getElementById('clientName').value;
+                const clientPhone = document.getElementById('clientPhone').value;
+                if (!serviceType.value || !clientName || !clientPhone) { alert('Completa los campos obligatorios.'); return; }
+                
+                let message = `Hola, quiero solicitar un servicio.\n\n*Nombre:* ${clientName}\n*Teléfono:* ${clientPhone}\n\n*Detalles:*\n`;
+                if (serviceType.value === 'impresion') {
+                    message += `- Servicio: Impresión\n- Tipo: ${document.getElementById('printingSubtype').value}\n`;
+                } else {
+                    message += `- Servicio: Llenado de Memoria\n- Capacidad: ${document.getElementById('memoryCapacity').value} GB\n`;
+                }
+                window.open(`https://wa.me/+5358682731?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        });
     </script>
 </body>
 </html>

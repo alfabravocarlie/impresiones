@@ -1,0 +1,28 @@
+{
+  "impresion": {
+    "texto_bn": "20",
+    "texto_color": "30",
+    "imagen_bn": "40",
+    "imagen_color": "50",
+    "fotocopia_bn": "50",
+    "fotocopia_color": "60",
+    "edicion": "100",
+    "plasticado_carnet": "200",
+    "plasticado_medio": "300",
+    "plasticado_carta": "600"
+  },
+  "memoria": {
+    "capacidad": {
+      "4gb": "50",
+      "8gb": "100",
+      "16gb": "150",
+      "32gb": "200",
+      "64gb": "250",
+      "128gb": "300"
+    },
+    "contenido": {
+      "capitulos": "5",
+      "musica": "100"
+    }
+  }
+}
