@@ -983,31 +983,73 @@
                 // document.getElementById('hero-btn-1').innerText = data.hero.cta_primary;
                 // document.getElementById('hero-btn-2').innerText = data.hero.cta_secondary;
 
-                // 2. ABOUT
-                document.getElementById('about-title-text').innerText = data.about.title;
-                document.getElementById('about-desc-text').innerText = data.about.description;
-                document.getElementById('about-img').src = data.about.image_url;
-                
-                // Features
-                document.getElementById('feat-1').innerHTML = `<strong>${data.about.features[0].title}:</strong> ${data.about.features[0].desc}`;
-                document.getElementById('feat-2').innerHTML = `<strong>${data.about.features[1].title}:</strong> ${data.about.features[1].desc}`;
-                document.getElementById('feat-3').innerHTML = `<strong>${data.about.features[2].title}:</strong> ${data.about.features[2].desc}`;
+// DENTRO DE TU FUNCION loadContentAndRender() ... reemplaza estas secciones:
 
-                // 3. TEAM
-                if(data.team) {
-                    document.getElementById('team-name-1').innerText = data.team[0].name;
-                    document.getElementById('team-role-1').innerText = data.team[0].role;
-                    document.getElementById('team-desc-1').innerText = data.team[0].desc;
-                    // Avatar generado
-                    document.getElementById('team-img-1').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.team[0].name)}&background=0D6EFD&color=fff`;
+// --- EQUIPO (AHORA DINÁMICO) ---
+if(data.team && data.team.length > 0) {
+    const teamContainer = document.querySelector('#equipo .row'); // Asegúrate que el HTML tiene esta estructura
+    teamContainer.innerHTML = ''; // Limpiar HTML viejo
+    
+    data.team.forEach((member, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 mb-4';
+        col.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+        
+        // Colores aleatorios para el borde según el índice
+        const borderColor = index % 2 === 0 ? 'var(--primary-color)' : 'var(--success-color)';
 
-                    if(data.team[1]) {
-                        document.getElementById('team-name-2').innerText = data.team[1].name;
-                        document.getElementById('team-role-2').innerText = data.team[1].role;
-                        document.getElementById('team-desc-2').innerText = data.team[1].desc;
-                        document.getElementById('team-img-2').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.team[1].name)}&background=25D366&color=fff`;
-                    }
-                }
+        col.innerHTML = `
+            <div class="team-member">
+                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random" alt="${member.name}" class="team-avatar">
+                <h4>${member.name}</h4>
+                <p class="fw-bold" style="color: ${borderColor};">${member.role}</p>
+                <p style="font-size: 0.9rem; color: #999;">${member.desc}</p>
+            </div>
+        `;
+        teamContainer.appendChild(col);
+    });
+}
+
+// --- CARACTERÍSTICAS (AHORA DINÁMICAS) ---
+if(data.about && data.about.features && data.about.features.length > 0) {
+    const featContainer = document.querySelector('.about-section ul.list-unstyled');
+    featContainer.innerHTML = ''; // Limpiar
+    
+    data.about.features.forEach((feat, i) => {
+        const li = document.createElement('li');
+        li.className = 'mb-3 d-flex align-items-center';
+        li.innerHTML = `
+            <i class="bi ${feat.icon} floating-icon me-3"></i>
+            <div><strong>${feat.title}:</strong> ${feat.desc}</div>
+        `;
+        featContainer.appendChild(li);
+    });
+}
+
+// --- SERVICIOS EXTRA (NUEVA SECCIÓN OPCIONAL) ---
+// Si quieres mostrar los servicios extra que agregues en el admin:
+if(data.precios && data.precios.servicios_extra) {
+    // Busca dónde quieres que aparezcan en tu HTML (ej: antes de la sección de precios fijos)
+    // Aquí un ejemplo de cómo inyectarlos dinámicamente:
+    const servicesRow = document.querySelector('#servicios .row'); // Ajusta según tu HTML
+    if(servicesRow) {
+        data.precios.servicios_extra.forEach(srv => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4';
+            col.setAttribute('data-aos', 'fade-up');
+            col.innerHTML = `
+                <div class="price-card h-100 text-center tilt-card">
+                    <div class="mb-3" style="color: var(--primary-color);"><i class="bi bi-stars fs-1"></i></div>
+                    <h5 class="mb-4 fw-bold">${srv.name}</h5>
+                    <div class="price-item justify-content-center">
+                        <span class="price" style="font-size: 1.5rem;">$${srv.price}</span>
+                    </div>
+                </div>
+            `;
+            servicesRow.appendChild(col);
+        });
+    }
+}
 
                 // 4. STATS
                 document.getElementById('stat-clients-num').innerText = data.stats.clients + '+';
